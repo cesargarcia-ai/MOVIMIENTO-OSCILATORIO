@@ -1,0 +1,17 @@
+{
+  "name": "Cuaderno Virtual de Física III - Movimiento Oscilatorio y MAS",
+  "short_name": "Física III MAS",
+  "description": "Cuaderno interactivo de física universitaria con planos estilo GeoGebra, demostraciones matemáticas completas y simulaciones físicas en tiempo real.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#1e3a8a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./assets/images/Portada.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

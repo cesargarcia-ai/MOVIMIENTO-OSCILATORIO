@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Imágenes a WebP</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #1e293b; color: white; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; background: #0f172a; color: #38bdf8; }
+        .status { font-weight: bold; color: #4ade80; }
+    </style>
+</head>
+<body>
+    <h1>Conversor WebP</h1>
+    <div id="status">Procesando...</div>
+    <h3>Portada WebP Base64:</h3>
+    <textarea id="portada_b64" readonly></textarea>
+    <h3>Hojas WebP Base64:</h3>
+    <textarea id="hojas_b64" readonly></textarea>
+    <script>
+        function fileToBase64Image(src, quality = 0.85) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const webpData = canvas.toDataURL('image/webp', quality);
+                    resolve({
+                        dataUrl: webpData,
+                        b64: webpData.split(',')[1],
+                        width: img.naturalWidth,
+                        height: img.naturalHeight
+                    });
+                };
+                img.onerror = (e) => reject(new Error('No se pudo cargar: ' + src));
+                img.src = src;
+            });
+        }
+
+        async function init() {
+            try {
+                const p = await fileToBase64Image('../assets/images/Portada.jpg', 0.85);
+                document.getElementById('portada_b64').value = p.b64;
+                
+                const h = await fileToBase64Image('../assets/images/Hojas.jpg', 0.85);
+                document.getElementById('hojas_b64').value = h.b64;
+
+                document.getElementById('status').innerText = 'CONVERSION_COMPLETA';
+                document.getElementById('status').className = 'status';
+            } catch (err) {
+                document.getElementById('status').innerText = 'ERROR: ' + err.message;
+            }
+        }
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

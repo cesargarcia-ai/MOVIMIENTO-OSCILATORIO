@@ -1,0 +1,263 @@
+/* ==========================================================================
+   SIMULACIÓN FÍSICA INTERACTIVA DE NIVEL PREMIUM (simulations.css)
+   Oscilador masa-resorte, fasores y barras de conservación de energía
+   ========================================================================== */
+
+.sim-container {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-lg);
+}
+
+.sim-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.sim-title {
+    font-size: 1.2rem;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+/* Área de Visualización Física (Masa-Resorte y Fasor) */
+.sim-stage-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.sim-viewport-box {
+    position: relative;
+    height: 280px;
+    background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #edf2f7 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sim-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sim-fasor-box {
+    position: relative;
+    height: 280px;
+    background: #f8fafc;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.fasor-title {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid var(--border-subtle);
+    background: #ffffff;
+    text-align: center;
+}
+
+/* Osciloscopio Dinámico en Vivo (x(t)) */
+.sim-oscilloscope-box {
+    position: relative;
+    height: 160px;
+    background: #0f172a;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border: 1px solid #334155;
+}
+
+.oscilloscope-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.oscilloscope-legend {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    display: flex;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #94a3b8;
+    z-index: 5;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Barras de Energía y Conservación en Tiempo Real */
+.energy-meters-panel {
+    background: #f8fafc;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.energy-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.energy-bars-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.energy-bar-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 90px;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+}
+
+.energy-name {
+    font-weight: 600;
+    color: #475569;
+}
+
+.energy-track {
+    height: 14px;
+    background: #e2e8f0;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+}
+
+.energy-fill-kinetic {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #0284c7, #38bdf8);
+    transition: width 0.05s linear;
+    border-radius: 9999px;
+}
+
+.energy-fill-potential {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ea580c, #fb923c);
+    transition: width 0.05s linear;
+    border-radius: 9999px;
+}
+
+.energy-fill-total {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    border-radius: 9999px;
+}
+
+.energy-value {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-align: right;
+    color: #0f172a;
+}
+
+/* Panel de Controles y Parámetros */
+.sim-controls-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.sim-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.sim-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ffffff;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.sim-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.sim-btn.btn-play {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #ffffff;
+    border: none;
+}
+
+.sim-btn.btn-play:hover {
+    background: linear-gradient(135deg, #047857, #059669);
+}
+
+.sim-telemetry-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+    background: #1e293b;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.telemetry-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.telemetry-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.telemetry-val {
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.sim-sliders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 860px) {
+    .sim-stage-grid {
+        grid-template-columns: 1fr;
+    }
+}
